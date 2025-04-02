@@ -20,8 +20,8 @@ api.interceptors.response.use(
       console.error("API Error: Unauthorized (401)");
       // Example: Trigger logout or token refresh logic here
       // Note: Avoid direct state manipulation; use events or context updates
-      // localStorage.removeItem('authToken');
-      // window.location.href = '/login'; // Force redirect (can be disruptive)
+      localStorage.removeItem("authToken");
+      window.location.href = "/login"; // Force redirect (can be disruptive)
     }
     return Promise.reject(error);
   }
