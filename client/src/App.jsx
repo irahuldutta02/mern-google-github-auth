@@ -9,6 +9,7 @@ import {
 import { AuthProvider } from "./contexts/AuthContext";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import GuestRoute from "./components/GuestRoute"; // <-- Import GuestRoute
 
 // Import Pages (using .jsx)
 import HomePage from "./pages/HomePage";
@@ -43,15 +44,33 @@ function App() {
               path="dashboard"
               element={
                 <ProtectedRoute>
+                  {" "}
+                  {/* Dashboard remains protected */}
                   <DashboardPage />
                 </ProtectedRoute>
               }
             />
           </Route>
 
-          {/* Standalone Routes */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          {/* Standalone Routes - Wrap Login/Register with GuestRoute */}
+          <Route
+            path="/login"
+            element={
+              <GuestRoute>
+                {/* <-- Use GuestRoute */}
+                <LoginPage />
+              </GuestRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <GuestRoute>
+                {/* <-- Use GuestRoute */}
+                <RegisterPage />
+              </GuestRoute>
+            }
+          />
           <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
           {/* Catch-all route */}
