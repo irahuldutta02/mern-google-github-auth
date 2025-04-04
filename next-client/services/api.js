@@ -36,10 +36,11 @@ api.interceptors.response.use(
       // Handle 401 - maybe trigger logout via context if possible,
       // or redirect. Direct localStorage manipulation here is okay,
       // but triggering a context update is cleaner if feasible.
-      // localStorage.removeItem('authToken');
-      // if (typeof window !== 'undefined') { // Ensure running client-side
-      //   window.location.href = '/login';
-      // }
+      localStorage.removeItem("authToken");
+      if (typeof window !== "undefined") {
+        // Ensure running client-side
+        window.location.href = "/login";
+      }
     }
     return Promise.reject(error);
   }
